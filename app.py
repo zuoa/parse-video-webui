@@ -39,7 +39,7 @@ def parse_video():
         external_url = f"{EXTERNAL_API_BASE_URL}/video/share/url/parse"
         params = {'url': video_url}
 
-        logger.info(f"正在解析视频: {video_url}")
+        logger.info(f"{external_url} 正在解析视频: {video_url}")
 
         # 调用外部API
         response = requests.get(external_url, params=params, timeout=30)
