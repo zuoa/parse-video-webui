@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader - JiaDan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-video"></i> Video Downloader</h1>
+            <p>解析视频分享链接，快速下载视频内容</p>
+        </header>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="videoUrl" 
+                        placeholder="请输入视频分享链接..." 
+                        class="url-input"
+                    >
+                    <button id="parseBtn" class="parse-btn">
+                        <i class="fas fa-search"></i>
+                        解析
+                    </button>
+                </div>
+                <div class="tips">
+                    <i class="fas fa-info-circle"></i>
+                    支持小红书、皮皮虾、抖音短视频、火山短视频、皮皮搞笑、快手短视频、微视短视频、西瓜视频、最右、梨视频、度小视(原全民)、逗拍、微博、绿洲、全民K歌、6间房、美拍、新片场、好看视频、虎牙、AcFun的分享链接
+                </div>
+            </div>
+
+            <div id="loadingIndicator" class="loading-indicator hidden">
+                <div class="spinner"></div>
+                <p>正在解析中...</p>
+            </div>
+
+            <div id="errorMessage" class="error-message hidden">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="errorText"></span>
+            </div>
+
+            <div id="resultSection" class="result-section hidden">
+                <div class="video-info">
+                    <div class="video-header">
+                        <div class="author-info">
+                            <img id="authorAvatar" src="" alt="作者头像" class="avatar">
+                            <div class="author-details">
+                                <h3 id="authorName"></h3>
+                                <span id="authorUid" class="uid"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-content">
+                        <div class="video-preview">
+                            <!-- 视频播放器 -->
+                            <video 
+                                id="videoPlayer" 
+                                class="video-player hidden" 
+                                controls 
+                                preload="metadata"
+                                poster=""
+                            >
+                                <source id="videoSource" src="" type="video/mp4">
+                                您的浏览器不支持视频播放。
+                            </video>
+                            
+                            <!-- 封面图片 (视频加载前显示) -->
+                            <div id="videoCoverContainer" class="cover-container">
+                                <img id="videoCover" src="" alt="视频封面" class="cover-image">
+                                <div class="play-overlay" id="playOverlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- 视频加载状态 -->
+                            <div id="videoLoadingIndicator" class="video-loading hidden">
+                                <div class="loading-spinner"></div>
+                                <p>视频加载中...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="video-details">
+                            <h2 id="videoTitle" class="title"></h2>
+                            
+                            <div class="download-section">
+                                <h4><i class="fas fa-download"></i> 下载选项</h4>
+                                <div class="download-options">
+                                    <button id="videoDownload" class="download-btn video-btn">
+                                        <i class="fas fa-video"></i>
+                                        下载视频
+                                    </button>
+                                    <button id="musicDownload" class="download-btn music-btn hidden">
+                                        <i class="fas fa-music"></i>
+                                        下载音频
+                                    </button>
+                                    <button id="coverDownload" class="download-btn cover-btn">
+                                        <i class="fas fa-image"></i>
+                                        下载封面
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- 视频信息 -->
+                            <div class="video-meta hidden" id="videoMeta">
+                                <div class="meta-item">
+                                    <span class="meta-label">视频时长:</span>
+                                    <span id="videoDuration">--</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">文件大小:</span>
+                                    <span id="videoSize">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Crafted with love ❤️ 2025</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
