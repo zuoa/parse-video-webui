@@ -3,10 +3,14 @@ services:
     image: docker.xuanyuan.me/wujunwei928/parse-video:latest
     container_name: video-parser
     restart: always
+    ports:
+      - "4080:4080"
     environment:
       - "TZ=Asia/Shanghai"
+    networks:
+      - bridge_net
   webui:
-    image: ghcr.io/zuoa/parse-video-webui:main
+    image: ghcr.nju.edu.cn/zuoa/parse-video-webui:main
     container_name: video-parse-webui
     restart: always
     ports:
@@ -15,5 +19,9 @@ services:
       - "TZ=Asia/Shanghai"
     depends_on:
       - parser
-    links:
-      - parser
+    networks:
+      - bridge_net
+
+networks:
+  bridge_net:
+    driver: bridge
