@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)  # 启用CORS支持
 
 # 外部API配置
-EXTERNAL_API_BASE_URL = 'http://175.24.201.244:4080'
+EXTERNAL_API_BASE_URL = 'http://parser:4080'
 
 
 @app.route('/')

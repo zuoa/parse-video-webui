@@ -1,0 +1,19 @@
+services:
+  parser:
+    image: docker.xuanyuan.me/wujunwei928/parse-video:latest
+    container_name: video-parser
+    restart: always
+    environment:
+      - "TZ=Asia/Shanghai"
+  webui:
+    image: ghcr.io/zuoa/parse-video-webui:main
+    container_name: video-parse-webui
+    restart: always
+    ports:
+      - "9020:9020"
+    environment:
+      - "TZ=Asia/Shanghai"
+    depends_on:
+      - parser
+    links:
+      - parser
