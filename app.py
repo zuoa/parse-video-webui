@@ -1,9 +1,13 @@
 import logging
+import os
 from urllib.parse import urlparse
 
 import requests
 from flask import Flask, render_template, jsonify, request, Response
+from flask.cli import load_dotenv
 from flask_cors import CORS
+
+load_dotenv()
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
@@ -13,7 +17,7 @@ app = Flask(__name__)
 CORS(app)  # 启用CORS支持
 
 # 外部API配置
-EXTERNAL_API_BASE_URL = 'http://parser:4080'
+EXTERNAL_API_BASE_URL = os.environ.get("PARSER_URL")
 
 
 @app.route('/')
